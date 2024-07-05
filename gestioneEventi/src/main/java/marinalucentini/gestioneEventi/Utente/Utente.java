@@ -8,8 +8,7 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "tipo_utente")
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -24,10 +23,11 @@ public class Utente {
     @Enumerated(EnumType.STRING)
     private Ruolo ruolo;
 
-    public Utente(String nome, String cognome, String email, String password) {
+    public Utente(String nome, String cognome, String email, String password, Ruolo ruolo) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.password = password;
+        this.ruolo = ruolo;
     }
 }
