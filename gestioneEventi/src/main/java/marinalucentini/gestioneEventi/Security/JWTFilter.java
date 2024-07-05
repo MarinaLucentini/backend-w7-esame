@@ -5,6 +5,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import marinalucentini.gestioneEventi.Exception.UnauthorizedException;
+import marinalucentini.gestioneEventi.Utente.Services.UtenteService;
+import marinalucentini.gestioneEventi.Utente.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,11 +21,20 @@ import java.util.UUID;
 @Component
 public class JWTFilter extends OncePerRequestFilter {
     @Autowired
-    JWTTool jwtTool;
+    private JWTTool jwtTool;
+    @Autowired
+    private UtenteService utenteService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
-
+        String authHeader = request.getHeader("Authorization");
+        if(authHeader == null || !authHeader.startsWith("Bearer ")) throw new UnauthorizedException("Per favore inserisci correttamente il token nell'header");
+        String accessToken = authHeader.substring(7);
+        jwtTool.verifyToken(accessToken);
+        String utenteId = jwtTool.extractIdFromToken(accessToken);
+        Utente currentUtente = utenteService.findById(UUID.fromString(utenteId));
+        Authentication authentication = new UsernamePasswordAuthenticationToken(currentUtente, null, currentUtente.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        filterChain.doFilter(request, response);
     }
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
