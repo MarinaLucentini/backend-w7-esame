@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-public class UtenteControllerAuth {
+public class
+UtenteControllerAuth {
     @Autowired
     UtenteService utenteService;
     @PostMapping("/register")
@@ -21,6 +22,6 @@ public class UtenteControllerAuth {
         if(bindingResult.hasErrors()){
             throw new BadRequestException(bindingResult.getAllErrors());
         }
-        return new UtenteRensponseDto( utenteService.saveEmployee(utenteDto).getId());
+        return new UtenteRensponseDto(utenteService.save(utenteDto).getId());
     }
 }
