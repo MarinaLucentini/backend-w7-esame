@@ -16,7 +16,6 @@ import java.util.UUID;
 public class UtenteService {
     @Autowired
    private UtenteRepository utenteRepository;
-
     @Autowired
     private PasswordEncoder bcrypt;
 public Utente findById(UUID id){
