@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public abstract class Utente {
+public class Utente {
     @Id
     @GeneratedValue
     private UUID id;
@@ -21,6 +21,8 @@ public abstract class Utente {
     private String cognome;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Ruolo ruolo;
 
     public Utente(String nome, String cognome, String email, String password) {
         this.nome = nome;

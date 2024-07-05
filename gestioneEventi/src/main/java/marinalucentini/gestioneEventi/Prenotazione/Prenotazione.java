@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import marinalucentini.gestioneEventi.Eventi.Evento;
-import marinalucentini.gestioneEventi.Utente.UtenteNormale;
+import marinalucentini.gestioneEventi.Utente.Utente;
 
 import java.util.UUID;
 
@@ -22,10 +22,10 @@ public class Prenotazione {
     private Evento evento;
 @ManyToOne
     @JoinColumn(name = "id_utente")
-    private UtenteNormale utenteNormale;
+    private Utente utente;
 
-    public Prenotazione(Evento evento, UtenteNormale utenteNormale) {
+    public Prenotazione(Evento evento, Utente utente) {
         this.evento = evento;
-        this.utenteNormale = utenteNormale;
+        this.utente = utente;
     }
 }
