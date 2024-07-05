@@ -7,9 +7,6 @@ import java.time.LocalDate;
 
 public record PrenotazioneDto(
         @NotEmpty (message = "Il titolo è un campo obbligatorio")
-        String evento,
-        @NotEmpty (message = "La descrizione è un campo obbligatorio")
-        String utente
-
+        String evento
 ) {
 }

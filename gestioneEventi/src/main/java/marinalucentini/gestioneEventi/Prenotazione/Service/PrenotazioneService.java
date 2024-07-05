@@ -22,9 +22,8 @@ public class PrenotazioneService {
     UtenteService utenteService;
     @Autowired
     EventoService eventoService;
-    public Prenotazione save(PrenotazioneDto prenotazioneDto){
+    public Prenotazione save(PrenotazioneDto prenotazioneDto, Utente utente){
 Evento evento = eventoService.findById(UUID.fromString(prenotazioneDto.evento()));
-        Utente utente = utenteService.findById(UUID.fromString(prenotazioneDto.utente()));
         Prenotazione prenotazione = new Prenotazione(evento, utente);
         return prenotazioneRepository.save(prenotazione);
     }

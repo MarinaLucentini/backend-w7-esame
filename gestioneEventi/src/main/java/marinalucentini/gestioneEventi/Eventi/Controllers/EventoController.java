@@ -7,8 +7,10 @@ import marinalucentini.gestioneEventi.Eventi.Service.EventoService;
 import marinalucentini.gestioneEventi.Exception.BadRequestException;
 import marinalucentini.gestioneEventi.Utente.Payload.UtenteDto;
 import marinalucentini.gestioneEventi.Utente.Payload.UtenteRensponseDto;
+import marinalucentini.gestioneEventi.Utente.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,10 +25,10 @@ public class EventoController {
     EventoService eventoService;
     @PostMapping
     @PreAuthorize("hasAuthority('ORGANIZZATORE')")
-    public EventoResponseDto creazioneEvento(@RequestBody @Validated EventoDto eventoDto, BindingResult bindingResult) {
+    public EventoResponseDto creazioneEvento(@RequestBody @Validated EventoDto eventoDto, BindingResult bindingResult, @AuthenticationPrincipal Utente utente) {
         if(bindingResult.hasErrors()){
             throw new BadRequestException(bindingResult.getAllErrors());
         }
-        return new EventoResponseDto(eventoService.save(eventoDto).getId());
+        return new EventoResponseDto(eventoService.save(eventoDto, utente).getId());
     }
 }

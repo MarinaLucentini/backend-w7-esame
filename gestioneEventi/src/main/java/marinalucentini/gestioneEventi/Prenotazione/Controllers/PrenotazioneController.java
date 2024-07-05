@@ -7,8 +7,10 @@ import marinalucentini.gestioneEventi.Exception.BadRequestException;
 import marinalucentini.gestioneEventi.Prenotazione.Payload.PrenotazioneDto;
 import marinalucentini.gestioneEventi.Prenotazione.Payload.PrenotazioneResponseDto;
 import marinalucentini.gestioneEventi.Prenotazione.Service.PrenotazioneService;
+import marinalucentini.gestioneEventi.Utente.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,10 +25,10 @@ public class PrenotazioneController {
     PrenotazioneService prenotazioneService;
     @PostMapping
     @PreAuthorize("hasAuthority('UTENTE')")
-    public PrenotazioneResponseDto creazioneEvento(@RequestBody @Validated PrenotazioneDto prenotazioneDto, BindingResult bindingResult) {
+    public PrenotazioneResponseDto creazionePrenotazione(@RequestBody @Validated PrenotazioneDto prenotazioneDto, BindingResult bindingResult, @AuthenticationPrincipal Utente utente) {
         if(bindingResult.hasErrors()){
             throw new BadRequestException(bindingResult.getAllErrors());
         }
-        return new PrenotazioneResponseDto(prenotazioneService.save(prenotazioneDto).getId());
+        return new PrenotazioneResponseDto(prenotazioneService.save(prenotazioneDto, utente).getId());
     }
 }
