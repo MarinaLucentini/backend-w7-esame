@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Component
 public class JWTTool {
-@Value("{jwt.secret}")
+@Value("${jwt.secret}")
     private String secret;
     public String createToken(Utente utente){
         return Jwts.builder()
