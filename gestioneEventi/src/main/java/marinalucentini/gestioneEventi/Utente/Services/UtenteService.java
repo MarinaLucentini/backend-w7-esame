@@ -15,4 +15,5 @@ public class UtenteService {
 public Utente findById(UUID id){
 return utenteRepository.findById(id).orElseThrow(()-> new NotFoundExp(id));
 }
+
 }
