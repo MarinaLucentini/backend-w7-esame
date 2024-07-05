@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>marinalucentini</groupId>
-	<artifactId>GestioneEventi</artifactId>
+	<artifactId>gestioneEventi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>backend-w7-esame</name>
+	<name>gestioneEventi</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>

@@ -1,13 +1,13 @@
-package marinalucentini.backend_w7_esame;
+package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendW7EsameApplication {
+public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendW7EsameApplication.class, args);
+		SpringApplication.run(DemoApplication.class, args);
 	}
 
 }
