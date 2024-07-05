@@ -27,12 +27,12 @@ public class Evento {
     private Utente  utente;
 
 
-    public Evento(String titolo, String descrizione, LocalDate data, String luogo, int posti_disponibili, Utente utente) {
+    public Evento(String titolo, String descrizione, LocalDate data, String luogo, int posti_disponibili) {
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.data = data;
         this.luogo = luogo;
         this.posti_disponibili = posti_disponibili;
-        this.utente = utente;
+
     }
 }
